@@ -11,7 +11,7 @@ public class ArrayTasks {
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-        return null;
+        return new String[]{"winter", "spring", "summer", "autumn"};
     }
 
     /**
@@ -23,7 +23,11 @@ public class ArrayTasks {
      * length = 1  -> [1] length = 3  -> [1, 2, 3] length = 5  -> [1, 2, 3, 4, 5]
      */
     public int[] generateNumbers(int length) {
-        return null;
+        int[] nums = new int[length];
+        for (int i=0; i<length; i++){
+            nums[i] = i+1;
+        }
+        return nums;
     }
 
     /**
@@ -34,7 +38,11 @@ public class ArrayTasks {
      * arr = [1, 3, 5]   -> sum = 9 arr = [5, -3, -4] -> sum = -2
      */
     public int totalSum(int[] arr) {
-        return 0;
+        int sum = 0;
+        for (int num : arr){
+            sum += num;
+        }
+        return sum;
     }
 
     /**
@@ -46,7 +54,13 @@ public class ArrayTasks {
      * arr = [99, -7, 102], number = -7    ->   2 arr = [5, -3, -4],   number = 10    ->  -1
      */
     public int findIndexOfNumber(int[] arr, int number) {
-        return 0;
+
+        for (int i = 0; i<arr.length; i++){
+            if (arr[i] == number){
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -58,7 +72,11 @@ public class ArrayTasks {
      * "pineapple"]
      */
     public String[] reverseArray(String[] arr) {
-        return null;
+        String[] reversedArr = new String[arr.length];
+        for (int i=0; i < arr.length; i++){
+            reversedArr[arr.length - i-1] = arr[i];
+        }
+        return reversedArr;
     }
 
     /**
@@ -70,20 +88,61 @@ public class ArrayTasks {
      * arr = [1,-2, 3]      -> [1, 3] arr = [-1, -2, -3]   -> [] arr = [1, 2]         -> [1, 2]
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
-        return null;
+        int countPositiveNum = 0;
+        for (int num : arr) {
+            if (num > 0){
+                countPositiveNum += 1;
+            }
+        }
+        int[] result = new int[countPositiveNum];
+        for (int i = 0, idx = 0; i < arr.length; i++) {
+            if (arr[i] > 0){
+                result[idx] = arr[i];
+                idx++;
+            }
+        }
+        return result;
+
     }
 
     /**
-     * Return a sorted, ragged, two-dimensional int[][] array following these rules: Incoming one-dimensional arrays
-     * must be arranged in ascending order of their length; numbers in all one-dimensional arrays must be in ascending
-     * order.
+     * Return a sorted, ragged, two-dimensional int[][] array following these rules:
+     * Incoming one-dimensional arrays must be arranged in ascending order of their length;
+     * numbers in all one-dimensional arrays must be in ascending order.
      * <p>
      * Example:
      * <p>
-     * arr = [[3, 1, 2,], [3,2]] -> [[2, 3], [1, 2, 3]] arr = [[5, 4], [7]]       -> [[7], [4, 5]]
+     * arr = [[3, 1, 2,], [3,2]] -> [[2, 3], [1, 2, 3]]
+     * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
-    public int[][] sortRaggedArray(int[][] arr) {
-        return null;
+    public static int[][] sortRaggedArray(int[][] arr) {
+        for (int[] ints : arr) {
+            sortOneDimentional(ints);
+        }
+        sortTwoDimentionalByLength(arr);
+        return arr;
+    }
+    public static void sortOneDimentional(int[] arr){
+        for (int i=0; i<arr.length; i++){
+            for (int j = 0; j < arr.length-i-1; j++){
+                if (arr[j] > arr[j+1]){
+                    int tmp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = tmp;
+                }
+            }
+        }
     }
 
+    public static void sortTwoDimentionalByLength(int[][] matrix){
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length - i-1; j++){
+                if (matrix[j].length > matrix[j+1].length){
+                    int[] tmp = matrix[j];
+                    matrix[j] = matrix[j+1];
+                    matrix[j+1] = tmp;
+                }
+            }
+        }
+    }
 }
